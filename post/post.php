@@ -2,6 +2,9 @@
 session_start();
 $path = '../';
 
+//githubテスト用
+    //ファーストコミット後にファイルを更新した。
+
 //入力フォームのvalueの値チェック関数の呼び出し
 // include_once $path. 'function/check.php';
 include_once $path. 'function/check.php';
