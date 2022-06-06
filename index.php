@@ -1,5 +1,6 @@
 <?php
     //githubテスト用
+    //ファーストコミット後にファイルを更新した。
     $path = './';
     $headTitle = 'スタートページ'; //ページタイトルを変数に格納
     include_once './template/head.php' ;
