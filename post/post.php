@@ -3,7 +3,9 @@ session_start();
 $path = '../';
 
 //githubテスト用
-    //ファーストコミット後にファイルを更新した。
+    //ファーストコミット後にファイルを更新した
+    
+//SSH認証通過したかテスト
 
 //入力フォームのvalueの値チェック関数の呼び出し
 // include_once $path. 'function/check.php';
