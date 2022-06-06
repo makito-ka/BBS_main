@@ -1,0 +1,25 @@
+.mainButton-test {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.header {
+  margin: 3rem auto;
+}
+
+.footer p {
+  text-align: center;
+}
+
+.badgeAlert {
+  margin-left: 0.5rem;
+}
+
+.mainButton {
+  text-align: center;
+}
+
+.fixBackground {
+  background-color: #e9ecef;
+}
+/*# sourceMappingURL=style.css.map */
