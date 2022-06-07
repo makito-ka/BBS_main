@@ -26,7 +26,7 @@
         <a href="./index.php">（テストデータ一覧表示）</a>
     </div>
     <div>入力フォーム</div>
-    <form action="thread_in_d.php" method="POST">
+    <form action="thread_in_c.php" method="POST">
     <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">スレッドタイトル<span class="badge rounded-pill bg-primary badgeAlert">必須</span></label>
                     <input type="text" name="threadTitle" value="<?=$threadTitle ?>" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="スレッドタイトルを入力してください">     
