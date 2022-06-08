@@ -5,9 +5,13 @@
     require_once $path . 'template/db.connect.php';
     //入力フォームから入力された値を変数に代入
     $memo = filter_input(INPUT_POST, 'memo', FILTER_SANITIZE_SPECIAL_CHARS);
-    //（このやり方だと改行や空欄が変換されDBに登録される。変換されて登録された）
-    // $memo = filter_input(INPUT_POST, 'memo');
+    //改行や空欄が変換されDBに登録される。（&#13;&#10; など）
+
+    //以下の二つを利用すれば、改行や空白はそのままDBへ登録される（二つは記述方法は違うが同じ動きをしている）
+    // $memo = filter_input(INPUT_POST, 'memo');　←フィルタの型を設定していないため実質フィルターをかけていないことになる。
     // $memo = $_POST['memo'];
+
+
     echo $memo;
     //
     $stmt = $mysqli->prepare('INSERT INTO memos(memo) VALUES (?)');
