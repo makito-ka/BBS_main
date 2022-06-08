@@ -30,10 +30,10 @@
         //ページのタイトル部（簡易掲示板の所）を変更
     ?>
     <!-- メインコンテンツ入力 -->
-    <a href="./input.php">入力フォームへ</a> |
+    <a href="#">新規投稿</a> |
+    <a href="./thread_in.php">スレッド新規作成</a> |
     <a href="./thread.php">スレッド一覧表示へ</a>
     <hr>
-    <h2>スレッド詳細ページ</h2>
     <div>
         <?php while($result = $stmt->fetch()): ?>
             <h4>

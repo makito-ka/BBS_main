@@ -30,10 +30,14 @@
         include_once $path . 'template/header.php';
     ?>
     <!-- メインコンテンツ入力 -->
-    <a href="./input.php">入力フォームへ（勉強用）</a> |
-    <a href="./index.php">index.phpへ</a> |
-    <a href="./thread_in.php">入力フォームへ（本番想定）</a>
-    <h3>メモ一覧</h3>
+    <div>
+        <a href="./input.php">入力フォームへ（勉強用）</a> |
+        <a href="./index.php">index.phpへ</a> |
+        <a href="./thread_in.php">入力フォームへ（本番想定）</a>
+    </div>
+    <br>
+    <h3>スレッド一覧</h3>
+    <br>
     <div>
         <?php while($thread = $threads->fetch_assoc()): ?>
             <h4><a href="value.php?id=<?=$thread['id']; ?>">

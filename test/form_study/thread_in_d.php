@@ -1,38 +1,47 @@
 <?php
-    
-    // <?php
-    // //セッションの初期化
-    // session_start();
-    // $_SESSION = [];  //明示的に配列の要素を空にする
-    // session_destroy();
+    session_start();
 
     //相対パスを変数に格納
     $path = '../../';
-
-
+    
     //データベース関係
     require_once $path . 'template/db.connect.php';
+    //$_SESSIONの値を変数に代入
+    foreach($_SESSION as $key => $value) {
+        $$key = $_SESSION[$key];
+    }
+
+    //スレッドタイトルを入力=>OK
+    $stmt = $mysqli->prepare('INSERT INTO thread (id, title, time) VALUES (NULL, ?, CURRENT_TIMESTAMP)');
+    $stmt->bind_param('s', $threadTitle);
+    $stmt->execute();
+
+    // echo $threadTitle;
+    // $threadTitle = 'Mac';
+
+    //threadテーブルから入力したスレッドタイトルのidを取得する=> OK
+    $stmt = $mysqli->prepare('SELECT id FROM thread WHERE title = ?');
+    $stmt->bind_param('s', $threadTitle);
+    $stmt->bind_result($thread_id);
+    $stmt->execute();
+    $stmt->fetch();
+    $stmt->close();  //この関数がないとうまく動かなかった・・なぜ？？
+    
+    $stmt = $mysqli->prepare('INSERT INTO text (id, thread_id, value, time) VALUES (NULL, ?, ?, CURRENT_TIMESTAMP)');
+    $stmt->bind_param('is', $thread_id, $text);
+    $stmt->execute();
+    
+
+    //データベース関係
     //入力フォームから入力された値を変数に代入
-    // $ = filter_input(INPUT_POST, 'memo', FILTER_SANITIZE_SPECIAL_CHARS);
+    // $threads = filter_input($db_input, 'memo', FILTER_SANITIZE_SPECIAL_CHARS);
     //（このやり方だと改行や空欄が変換されDBに登録される。変換されて登録された）
-    // $memo = filter_input(INPUT_POST, 'memo');
+    // $memo = filter_input($db_input, 'memo');
     // $memo = $_POST['memo'];
 
-
-    // echo $memo;
-    // //
-    // $stmt = $mysqli->prepare('INSERT INTO memos(memo) VALUES (?)');
-    // if(!$stmt) {
-    //     die($mysqli->error);
-    // }
-    // $stmt->bind_param('s', $memo);
-    // $ret = $stmt->execute();
-
-    // if($ret) {
-    //     echo '登録完了';
-    // } else {
-    //     echo $mysqli->error;
-    // }
+    //セッションの初期化
+    $_SESSION = [];  //明示的に配列の要素を空にする
+    session_destroy();
 ?>
 <?php
 //<head>要素関係の呼び出し

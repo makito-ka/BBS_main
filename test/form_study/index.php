@@ -31,7 +31,17 @@
         <?php while($memo = $memos->fetch_assoc()): ?>
             <h4><a href="#">
                 <?php
-                    echo nl2br(htmlspecialchars($memo['memo'],)); 
+                    // echo nl2br(htmlspecialchars($memo['memo'],));
+
+                    $test = str_replace('&#13;&#10;', '\n', $memo['memo'], $cnt);
+                    // echo $test;
+                    echo nl2br($test);
+                    // $test = nl2br(htmlspecialchars($memo['memo'],));
+
+
+                    // echo htmlspecialchars($memo['memo'],);
+                    // echo nl2br($memo['memo']); 
+                    
                     //↑↑入力フォームからDBへデータを渡す際にfilter_inputのフィルタオプションをかけなければ、改行が表示できるコード（未完成コード）
                     // echo nl2br(htmlspecialchars($memo['memo'],ENT_HTML5));
                     // echo htmlspecialchars($memo['memo']);

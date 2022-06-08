@@ -1,12 +1,11 @@
 <?php
-    // session_start();
+    session_start();
     //相対パスを変数に格納
     $path = '../../';
     //データベースログイン
     require_once $path . 'template/db.connect.php';
     //入力フォームの値チェック（初期化）
     include_once $path. 'function/check.php';
-
 ?>
 <?php
     //<head>要素関係の呼び出し
@@ -21,11 +20,9 @@
     ?>
     <!-- メインコンテンツ入力 -->
     <div>
-        <a href="./thread.php">スレッド一覧</a> |
-        <br>
-        <a href="./index.php">（テストデータ一覧表示）</a>
+        <a href="./thread.php">スレッド一覧</a>
     </div>
-    <div>入力フォーム</div>
+    <br>
     <form action="thread_in_c.php" method="POST">
     <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">スレッドタイトル<span class="badge rounded-pill bg-primary badgeAlert">必須</span></label>

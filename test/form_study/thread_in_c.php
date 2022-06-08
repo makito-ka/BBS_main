@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 
 //POSTデータをSESSION配列に格納
 $_SESSION = [
@@ -23,6 +23,8 @@ include_once $path. 'template/head.php';
     <?php
         include_once $path. 'template/header.php';
     ?>
+    <div><a href="./thread.php">スレッド一覧</a></div>
+    <br>
     <div class="mainWrapper">
         <section class="mainContent">
             <form method="POST" action="./success.php">
@@ -43,9 +45,7 @@ include_once $path. 'template/head.php';
                     <button type="submit" formaction= "./thread_in_d.php" class="btn btn-primary">完了する</button>
                 </div>
             </form>
-        </section>
-        <div><a href="./thread_in.php">トップページに戻る（テスト）</a></div>
-        
+        </section>        
     </div>
 </div>
 <!-- フッター -->
