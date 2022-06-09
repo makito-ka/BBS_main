@@ -6,7 +6,7 @@
     //入力フォームから入力された値を変数に代入
     
     //
-    $threads = $mysqli->query('SELECT * FROM thread');
+    $threads = $mysqli->query('SELECT * FROM thread ORDER BY id DESC');
     if(!$threads) {
         die($mysqli->error);
     }

@@ -2,6 +2,7 @@
     session_start();
     //相対パスを変数に格納
     $path = '../../';
+    var_dump($_SESSION);
     //スレッド詳細画面から遷移した場合にidを取得する
     $id = $_SESSION['id'];
     // $text = $_SESSION['text'];
@@ -11,10 +12,10 @@
     // if(!isset($text)) {
     //     $text = '';
     // }
-    if(!isset($_SESSION['text'])) {
-        $text = '';
-    } else {
+    if(isset($_SESSION['text'])) {
         $text = $_SESSION['text'];
+    } else {
+        $text = '';
     }
     //データベース
     require_once $path . 'template/db.connect.php';
@@ -25,7 +26,7 @@
     $stmt->fetch();
     $result = $threadTitle;
     $_SESSION['threadTitle'] = $result;
-    print_r($_SESSION);
+    // print_r($_SESSION);
     
 ?>
 <?php

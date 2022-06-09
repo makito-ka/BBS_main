@@ -2,10 +2,47 @@
     session_start();
     //相対パスを変数に格納
     $path = '../../';
-    //データベースログイン
-    require_once $path . 'template/db.connect.php';
-    //入力フォームの値チェック（初期化）
+    
+    
+    //上のやつの関数
+    // if(!empty($_SESSION)) {
+    //     foreach($_SESSION as $key => $value) {
+    //         $$key = $_SESSION[$key];
+    //     }
+    // } 
+
+    //入力フォームの値チェック（スレッド詳細ページから遷移した場合に初期化する）
+    var_dump($_SESSION);
+    if(isset($_SESSION['id'])) {
+        $_SESSION = [];
+        $threadTitle = '';
+        $text = '';
+    }
+    var_dump($_SESSION);
+    //入力フォームの値チェック
     include_once $path. 'function/check.php';
+    
+
+    // if(isset($_SESSION['text'])) {
+    //     $text = $_SESSION['text'];
+    // } else {
+    //     $text = '';
+    // }
+    
+    // var_dump($_SESSION['id']);
+    // var_dump($_SESSION);
+    // print_r($_SESSION);
+
+    // if(!empty($_SESSION)) {
+    //     foreach($_SESSION as $key => $value) {
+    //         $$key = $_SESSION[$key];
+    //     }
+    // } else {
+    //     $threadTitle = '';
+    //     $text = '';
+    // }
+    
+    // var_dump($threadTitle);
 ?>
 <?php
     //<head>要素関係の呼び出し

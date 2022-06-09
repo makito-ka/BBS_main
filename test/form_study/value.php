@@ -7,7 +7,7 @@
     //入力フォームから入力された値を変数に代入
     
     //
-    $stmt = $mysqli->prepare('SELECT * FROM text WHERE thread_id = ?');
+    $stmt = $mysqli->prepare('SELECT * FROM text WHERE thread_id = ? ORDER BY id DESC');
     $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
     //URLパラメータに数字以外が入力された場合は、トップへ戻す。　←DBから最大のIDを取得すれば、DBに存在しないデータも処理できる？？
     if(!$id) {
