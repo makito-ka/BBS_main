@@ -5,7 +5,8 @@ $path = '../../';
 // POSTデータをSESSION配列に格納
 $_SESSION['text'] = $_POST['text'];
 
-print_r($_SESSION);
+// print_r($_SESSION);
+var_dump($_POST);
 foreach($_POST as $key => $value) {
     $$key = $_POST[$key];
 }

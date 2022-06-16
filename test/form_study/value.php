@@ -4,15 +4,26 @@
     $path = '../../';
     //データベース関係
     require_once $path . 'template/db.connect.php';
-    //入力フォームから入力された値を変数に代入
     
-    //
-    $stmt = $mysqli->prepare('SELECT * FROM text WHERE thread_id = ? ORDER BY id DESC');
+    // 〜URLパラメータチェック〜　ここから
+    //数字のみ受付
     $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-    //URLパラメータに数字以外が入力された場合は、トップへ戻す。　←DBから最大のIDを取得すれば、DBに存在しないデータも処理できる？？
-    if(!$id) {
+    
+    //DBの存在チェック
+    $stmt = $mysqli->prepare('SELECT id FROM `thread` WHERE EXISTS (SELECT * FROM thread WHERE id = ? )');
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $stmt->bind_result($exists);
+    $stmt->fetch();
+    $stmt->close();
+
+    if(!$id || !$exists) {
         header('Location: ./thread.php');
     }
+    // 〜URLパラメータチェック〜　ここまで
+
+    //データを取得し変数に渡す
+    $stmt = $mysqli->prepare('SELECT * FROM text WHERE thread_id = ? ORDER BY id DESC');
     $stmt->bind_param('i', $id);
     $stmt->execute();
     $stmt->bind_result($id, $thread_id, $value, $time);
@@ -35,18 +46,19 @@
     <!-- メインコンテンツ入力 -->
     <a href="./post.php">新規投稿</a> |
     <a href="./thread_in.php">スレッド新規作成</a> |
-    <a href="./thread.php">スレッド一覧表示へ</a>
+    <!-- <a href="./thread.php">スレッド一覧表示へ</a> -->
     <hr>
     <div>
-        <?php while($result = $stmt->fetch()): ?>
+        <?php 
+        while($result = $stmt->fetch()):
+        ?>
             <h4>
                 <?php
-                    echo nl2br(htmlspecialchars($value,)); 
-                    //↑↑入力フォームからDBへデータを渡す際にfilter_inputのフィルタオプションをかけなければ、改行が表示できるコード（未完成コード）
-                    // echo nl2br(htmlspecialchars($memo['memo'],ENT_HTML5));
-                    // echo htmlspecialchars($memo['memo']);
+                    //DBからの取得データをサニタイズしてから改行をする
+                    echo nl2br(htmlspecialchars($value, ENT_QUOTES, 'UTF-8'));
                 ?>
             </h4>
+            <!-- 改行が不要なためこのコードにしている -->
             <time><?=htmlspecialchars($time);?></time>
         <hr>
         <?php endwhile;
@@ -57,5 +69,6 @@
 <?php
     include_once $path . 'template/footer.php';
 ?>
+
 </body>
 </html>

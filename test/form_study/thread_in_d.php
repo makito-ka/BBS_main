@@ -6,18 +6,18 @@
     
     //データベース関係
     require_once $path . 'template/db.connect.php';
-    //$_SESSIONの値を変数に代入
+    
+    //入力でーたのサニタイズ
     foreach($_SESSION as $key => $value) {
-        $$key = $_SESSION[$key];
+        $sanitize = htmlspecialchars($_SESSION[$key]);
+        $$key =  str_replace(array("\r\n","\r"), "\n", $sanitize);
     }
 
     //スレッドタイトルを入力=>OK
     $stmt = $mysqli->prepare('INSERT INTO thread (id, title, time) VALUES (NULL, ?, CURRENT_TIMESTAMP)');
     $stmt->bind_param('s', $threadTitle);
     $stmt->execute();
-
-    // echo $threadTitle;
-    // $threadTitle = 'Mac';
+    $stmt->close();
 
     //threadテーブルから入力したスレッドタイトルのidを取得する=> OK
     $stmt = $mysqli->prepare('SELECT id FROM thread WHERE title = ?');
@@ -25,7 +25,7 @@
     $stmt->bind_result($thread_id);
     $stmt->execute();
     $stmt->fetch();
-    $stmt->close();  //この関数がないとうまく動かなかった・・なぜ？？
+    $stmt->close();
     
     $stmt = $mysqli->prepare('INSERT INTO text (id, thread_id, value, time) VALUES (NULL, ?, ?, CURRENT_TIMESTAMP)');
     $stmt->bind_param('is', $thread_id, $text);
